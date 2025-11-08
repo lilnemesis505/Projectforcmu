@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+/* --- ส่วน Navbar --- */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Logo ซ้าย, เมนูขวา */
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.navbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+.navbar .nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.navbar .nav-links li {
+    display: inline-block; /* เมนูแนวนอน */
+    margin-left: 20px;
+}
+.navbar .nav-links li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+}
+.navbar .nav-links li a:hover {
+    color: #007bff;
+}
+
+/* --- Container หลัก --- */
+/* (Bootstrap ก็มี .container แต่เราใช้ของเราเพื่อกำหนดพื้นหลังสีขาว) */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+/* --- ส่วน Banner (ซ้าย-ขวา) --- */
+.banner-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.main-banner {
+    flex: 2; /* กว้าง 2 ส่วน */
+}
+.side-banners {
+    flex: 1; /* กว้าง 1 ส่วน */
+    display: flex;
+    flex-direction: column; /* รูปเล็กเรียงแนวตั้ง */
+    gap: 20px; 
+}
+.banner-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* --- ส่วนข่าว (Bootstrap) --- */
+/* (เราใช้สไตล์ Bootstrap สำหรับการ์ด แต่ยังเก็บสไตล์หัวข้อของเราไว้) */
+.news-section {
+    margin-bottom: 30px;
+}
+.news-section h2 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
