@@ -1,5 +1,9 @@
 <?php
-session_start();
+// [แก้ไข]
+// ตรวจสอบก่อนว่า Session ยังไม่เริ่ม ค่อยสั่งเริ่ม
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // 1. ตรวจสอบ Session (ถ้ามีคือจบ, ล็อกอินอยู่แล้ว)
 if (isset($_SESSION['admin_id'])) {
@@ -10,25 +14,21 @@ if (isset($_SESSION['admin_id'])) {
 if (!isset($_COOKIE['remember_me'])) {
     // ไม่มีทั้ง Session และ Cookie -> ไปหน้า Login
     
-    // (แก้ไขจุดที่ 1) ต้องชี้ไปที่โฟลเดอร์ auth
+    // [ยืนยัน] Path นี้ถูกต้อง (อิงจาก URL ที่ /admin/)
     header('Location: auth/login.php'); 
     exit;
 }
 
-// 3. มี Cookie, พยายามยืนยันตัวตนจาก Cookie
-
-// (แก้ไขจุดที่ 2) ต้องถอย 2 ขั้น (../../)
-require_once __DIR__ . '/../../include/db.php'; 
 
 list($selector, $validator) = explode(':', $_COOKIE['remember_me'], 2);
 
 if (empty($selector) || empty($validator)) {
-    // (แก้ไขจุดที่ 1)
+    // [ยืนยัน] Path นี้ถูกต้อง
     header('Location: auth/login.php');
     exit;
 }
 
-// 4. ค้นหา Selector ใน DB
+// 4. ค้นหา Selector ใน DB (ใช้ $pdo จาก config.php)
 $stmt = $pdo->prepare("SELECT * FROM auth_tokens WHERE selector = ? AND expires >= NOW()");
 $stmt->execute([$selector]);
 $token = $stmt->fetch();
@@ -37,7 +37,7 @@ if (!$token) {
     // ไม่พบ Selector หรือหมดอายุ
     setcookie('remember_me', '', time() - 3600, '/'); // ล้าง Cookie ทิ้ง
     
-    // (แก้ไขจุดที่ 1)
+    // [ยืนยัน] Path นี้ถูกต้อง
     header('Location: auth/login.php');
     exit;
 }
@@ -52,6 +52,10 @@ if (password_verify($validator, $token['hashed_validator'])) {
     $stmt_user->execute([$token['admin_id']]);
     $user = $stmt_user->fetch();
 
+    // [แก้ไข]
+    // ควรตั้ง Session ให้ครบถ้วนตามที่โค้ดเก่าของคุณอาจจะเคยใช้
+    // (ไฟล์ก่อนหน้านี้คุณใช้ 'admin_logged_in')
+    $_SESSION['admin_logged_in'] = true; 
     $_SESSION['admin_id'] = $user['id'];
     $_SESSION['admin_username'] = $user['username'];
 
@@ -73,7 +77,7 @@ if (password_verify($validator, $token['hashed_validator'])) {
     
     setcookie('remember_me', '', time() - 3600, '/');
     
-    // (แก้ไขจุดที่ 1)
+    // [ยืนยัน] Path นี้ถูกต้อง
     header('Location: auth/login.php');
     exit;
 }
