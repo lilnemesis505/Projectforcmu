@@ -14,7 +14,7 @@ if (!isset($path_prefix)) {
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
-    <link rel="stylesheet" href="<?php echo $path_prefix; ?>assets/css/style.css">
+    <link rel="stylesheet" href="/Projectforcmu/assets/css/style.css">
 
 </head>
 <body>
@@ -25,8 +25,8 @@ if (!isset($path_prefix)) {
         </div>
         <ul class="nav-links">
             <li><a href="<?php echo $path_prefix; ?>index.php">หน้าหลัก</a></li>
-            <li><a href="<?php echo $path_prefix; ?>member.php">สมาชิก</a></li>
-            <li><a href="<?php echo $path_prefix; ?>board.php">ผู้ถือหุ้น</a></li>
+            <li><a href="<?php echo $path_prefix; ?>member/member.php">สมาชิก</a></li>
+            <li><a href="<?php echo $path_prefix; ?>board/board.php">ผู้ถือหุ้น</a></li>
             <li><a href="#">อื่นๆ</a></li>
         </ul>
     </nav>

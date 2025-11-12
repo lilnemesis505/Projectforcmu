@@ -1,6 +1,9 @@
 <?php 
-    // 1. เรียกใช้ Header (เมนูบาร์ด้านบน)
-    require_once 'include/header.php'; 
+    // [!!! เพิ่ม !!!] 1. เรียก Config หลัก (เพื่อเอา PROJECT_URL)
+    require_once __DIR__ . '/../config.php'; 
+
+    // 2. เรียกใช้ Header (เมนูบาร์ด้านบน)
+    require_once '../include/header.php';
 ?>
 
 <div class="container my-5">
@@ -57,7 +60,7 @@
                     </ol>
 
                     <div class="text-center mt-5">
-                        <a href="index.php" class="btn btn-outline-secondary">
+                        <a href="<?php echo PROJECT_URL; ?>index.php" class="btn btn-outline-secondary">
                             &laquo; กลับหน้าแรก
                         </a>
                     </div>
@@ -70,6 +73,6 @@
 </div>
 
 <?php 
-    // 2. เรียกใช้ Footer
-    require_once 'include/footer.php'; 
+    // 3. เรียกใช้ Footer
+    require_once '../include/footer.php';
 ?>
